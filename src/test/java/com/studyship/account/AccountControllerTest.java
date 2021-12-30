@@ -22,6 +22,7 @@ class AccountControllerTest {
     void signUpForm() throws Exception {
         mockMvc.perform(get("/sign-up"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("account/sign-up"));
+                .andExpect(view().name("account/sign-up"))
+                .andExpect(model().attributeExists("signUpForm"));
     }
 }
