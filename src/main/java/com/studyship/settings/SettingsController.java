@@ -70,7 +70,6 @@ public class SettingsController {
             return SETTINGS_PASSWORD_VIEW_NAME;
         }
 
-        //변경
         accountService.updatePassword(account, passwordForm.getNewPassword());
         attributes.addFlashAttribute("message", "패스워드를 변경했습니다");
         return "redirect:" + SETTINGS_PASSWORD_URL;
