@@ -96,7 +96,5 @@ public class AccountController {
         model.addAttribute("isOwner", byNickname.equals(account));
         return "account/profile";
     }
-
-
 }
 
