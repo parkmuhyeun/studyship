@@ -1,8 +1,8 @@
 package com.studyship.account;
 
 import com.studyship.domain.Account;
-import com.studyship.settings.Notifications;
-import com.studyship.settings.Profile;
+import com.studyship.settings.form.Notifications;
+import com.studyship.settings.form.Profile;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.mail.SimpleMailMessage;
