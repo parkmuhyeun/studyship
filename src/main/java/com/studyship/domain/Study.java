@@ -79,4 +79,7 @@ public class Study {
         return this.managers.contains(userAccount.getAccount());
     }
 
+    public void addMember(Account account) {
+        this.getMembers().add(account);
+    }
 }
