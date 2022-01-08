@@ -1,5 +1,7 @@
-package com.studyship.account;
+package com.studyship.account.validator;
 
+import com.studyship.account.AccountRepository;
+import com.studyship.account.form.SignUpForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
