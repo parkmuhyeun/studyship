@@ -1,5 +1,6 @@
 package com.studyship.account;
 
+import com.studyship.account.form.SignUpForm;
 import com.studyship.config.AppProperties;
 import com.studyship.domain.Account;
 import com.studyship.domain.Tag;
