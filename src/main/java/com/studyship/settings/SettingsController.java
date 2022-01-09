@@ -10,7 +10,10 @@ import com.studyship.domain.Zone;
 import com.studyship.settings.form.*;
 import com.studyship.settings.validator.NicknameFormValidator;
 import com.studyship.settings.validator.PasswordFormValidator;
+import com.studyship.tag.TagForm;
 import com.studyship.tag.TagRepository;
+import com.studyship.tag.TagService;
+import com.studyship.zone.ZoneForm;
 import com.studyship.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -50,6 +53,7 @@ public class SettingsController {
     private final TagRepository tagRepository;
     private final ZoneRepository zoneRepository;
     private final ObjectMapper objectMapper;
+    private final TagService tagService;
 
     @InitBinder("passwordForm")
     public void initBinder(WebDataBinder webDataBinder) {
@@ -140,12 +144,7 @@ public class SettingsController {
     @PostMapping(TAGS + "/add")
     @ResponseBody
     public ResponseEntity addTag(@CurrentAccount Account account, @RequestBody TagForm tagForm) {
-        String title = tagForm.getTagTitle();
-        Tag tag = tagRepository.findByTitle(title);
-        if (tag == null) {
-            tag = tagRepository.save(Tag.builder().title(title).build());
-        }
-
+        Tag tag = tagService.findOrCreateNew(tagForm.getTagTitle());
         accountService.addTag(account, tag);
         return ResponseEntity.ok().build();
     }
@@ -154,7 +153,6 @@ public class SettingsController {
     @ResponseBody
     public ResponseEntity removeTag(@CurrentAccount Account account, @RequestBody TagForm tagForm) {
         String title = tagForm.getTagTitle();
-
         Tag tag = tagRepository.findByTitle(title);
         if (tag == null) {
             return ResponseEntity.badRequest().build();

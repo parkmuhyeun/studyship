@@ -1,4 +1,4 @@
-package com.studyship.settings.form;
+package com.studyship.tag;
 
 import lombok.Data;
 
