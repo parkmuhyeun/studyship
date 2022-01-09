@@ -68,4 +68,18 @@ public class StudyController {
         model.addAttribute(study);
         return "study/members";
     }
+
+    @GetMapping("/study/{path}/join")
+    String joinStudy(@CurrentAccount Account account, @PathVariable String path) {
+        Study study = studyRepository.findStudyWithMembersByPath(path);
+        studyService.addMember(study, account);
+        return "redirect:/study/" + study.getEncodedPath() + "/members";
+    }
+
+    @GetMapping("/study/{path}/leave")
+    String leaveStudy(@CurrentAccount Account account, @PathVariable String path) {
+        Study study = studyRepository.findStudyWithMembersByPath(path);
+        studyService.removeMember(study, account);
+        return "redirect:/study/" + study.getEncodedPath() + "/members";
+    }
 }
