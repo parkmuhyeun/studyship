@@ -107,9 +107,9 @@ public class EventController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEvent(@CurrentAccount Account account, @PathVariable String path,
-                              @PathVariable Long id, @Valid EventForm eventForm, Errors errors,
-                              Model model) {
+    public String updateEventSubmit(@CurrentAccount Account account, @PathVariable String path,
+                                    @PathVariable Long id, @Valid EventForm eventForm, Errors errors,
+                                    Model model) {
         Study study = studyService.getStudyToUpdate(account, path);
         Event event = eventRepository.findById(id).orElseThrow();
         eventForm.setEventType(event.getEventType());
@@ -123,6 +123,14 @@ public class EventController {
         }
 
         eventService.updateEvent(event, eventForm);
-        return "redirect:/study/" + study.getPath() + "/events/" + event.getId();
+        return "redirect:/study/" + study.getEncodedPath() +  "/events/" + event.getId();
     }
+
+    @DeleteMapping("/events/{id}")
+    public String cancelEvent(@CurrentAccount Account account, @PathVariable String path, @PathVariable Long id) {
+        Study study = studyService.getStudyToUpdateStatus(account, path);
+        eventService.deleteEvent(eventRepository.findById(id).orElseThrow());
+        return "redirect:/study/" + study.getEncodedPath() + "/events";
+    }
+
 }
