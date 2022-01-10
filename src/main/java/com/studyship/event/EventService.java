@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,12 +24,15 @@ public class EventService {
         event.setCreatedBy(account);
         event.setCreatedDateTime(LocalDateTime.now());
         event.setStudy(study);
-
         return eventRepository.save(event);
     }
 
     public void updateEvent(Event event, EventForm eventForm) {
         modelMapper.map(eventForm, event);
         //TODO 모집 인원을 늘린 선착순 모임의 경우에 자등으로 추가 확정
+    }
+
+    public void deleteEvent(Event event) {
+        eventRepository.delete(event);
     }
 }
