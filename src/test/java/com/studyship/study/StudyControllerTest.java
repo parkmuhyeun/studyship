@@ -26,11 +26,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RequiredArgsConstructor
 class StudyControllerTest {
 
-    @Autowired MockMvc mockMvc;
-    @Autowired StudyRepository studyRepository;
-    @Autowired AccountRepository accountRepository;
-    @Autowired StudyService studyService;
-    @Autowired AccountService accountService;
+    @Autowired protected MockMvc mockMvc;
+    @Autowired protected StudyRepository studyRepository;
+    @Autowired protected AccountRepository accountRepository;
+    @Autowired protected StudyService studyService;
+    @Autowired protected AccountService accountService;
 
     @Test
     @WithAccount("muto")
