@@ -2,12 +2,12 @@ package com.studyship.modules.study;
 
 import com.studyship.modules.account.Account;
 import com.studyship.modules.account.UserAccount;
-import com.studyship.modules.study.Study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StudyTest {
     Study study;

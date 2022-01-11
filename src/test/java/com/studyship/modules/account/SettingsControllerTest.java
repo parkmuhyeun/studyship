@@ -1,33 +1,30 @@
 package com.studyship.modules.account;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studyship.infra.MockMvcTest;
 import com.studyship.modules.tag.Tag;
-import com.studyship.modules.zone.Zone;
 import com.studyship.modules.tag.TagForm;
-import com.studyship.modules.zone.ZoneForm;
 import com.studyship.modules.tag.TagRepository;
+import com.studyship.modules.zone.Zone;
+import com.studyship.modules.zone.ZoneForm;
 import com.studyship.modules.zone.ZoneRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import static com.studyship.modules.account.SettingsController.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@Transactional
-@SpringBootTest
-@AutoConfigureMockMvc
+@MockMvcTest
 class SettingsControllerTest {
 
     @Autowired MockMvc mockMvc;

@@ -1,6 +1,5 @@
 package com.studyship.modules.account;
 
-import com.studyship.modules.study.Study;
 import com.studyship.modules.tag.Tag;
 import com.studyship.modules.zone.Zone;
 import lombok.*;
