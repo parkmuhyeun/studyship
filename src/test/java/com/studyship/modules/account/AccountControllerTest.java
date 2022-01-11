@@ -1,5 +1,6 @@
 package com.studyship.modules.account;
 
+import com.studyship.infra.AbstractContainerBaseTest;
 import com.studyship.infra.MockMvcTest;
 import com.studyship.infra.mail.EmailMessage;
 import com.studyship.infra.mail.EmailService;
@@ -21,8 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
-class AccountControllerTest {
-
+class AccountControllerTest extends AbstractContainerBaseTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private AccountRepository accountRepository;
