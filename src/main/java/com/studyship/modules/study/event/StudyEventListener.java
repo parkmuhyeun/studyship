@@ -6,6 +6,7 @@ import com.studyship.infra.mail.EmailService;
 import com.studyship.modules.account.Account;
 import com.studyship.modules.account.AccountPredicates;
 import com.studyship.modules.account.AccountRepository;
+import com.studyship.modules.event.EventRepository;
 import com.studyship.modules.notification.Notification;
 import com.studyship.modules.notification.NotificationRepository;
 import com.studyship.modules.notification.NotificationType;
@@ -36,6 +37,7 @@ public class StudyEventListener {
     private final TemplateEngine templateEngine;
     private final AppProperties appProperties;
     private final NotificationRepository notificationRepository;
+    private final EventRepository eventRepository;
 
     @EventListener
     public void handleStudyCreatedEvent(StudyCreatedEvent studyCreatedEvent) {
@@ -44,7 +46,7 @@ public class StudyEventListener {
 
         accounts.forEach(account -> {
             if (account.isStudyCreatedByEmail()) {
-                sendStudyCreatedEmail(study, account, "새로운 스터디가 생겼습니다",
+                sendEmail(study, account, "새로운 스터디가 생겼습니다",
                         "스터디쉽, '" + study.getTitle() + "' 스터디가 생겼습니다.");
             }
 
@@ -63,7 +65,7 @@ public class StudyEventListener {
 
         accounts.forEach(account -> {
             if (account.isStudyCreatedByEmail()) {
-                sendStudyCreatedEmail(study, account, studyUpdateEvent.getMessage(),
+                sendEmail(study, account, studyUpdateEvent.getMessage(),
                         "스터디쉽, '" + study.getTitle() + "' 스터디에 새소식이 있습니다.");
             }
 
@@ -72,7 +74,6 @@ public class StudyEventListener {
             }
         });
     }
-
 
     private void createNotification(Study study, Account account, String message, NotificationType notificationType) {
         Notification notification = new Notification();
@@ -86,7 +87,7 @@ public class StudyEventListener {
         notificationRepository.save(notification);
     }
 
-    private void sendStudyCreatedEmail(Study study, Account account, String contextMessage, String emailSubject) {
+    private void sendEmail(Study study, Account account, String contextMessage, String emailSubject) {
         Context context = new Context();
         context.setVariable("nickname", account.getNickname());
         context.setVariable("link", "/study/" + study.getEncodedPath());
