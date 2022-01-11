@@ -3,7 +3,9 @@ package com.studyship.modules.event;
 import com.studyship.modules.account.Account;
 import com.studyship.modules.account.UserAccount;
 import com.studyship.modules.study.Study;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

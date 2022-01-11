@@ -1,12 +1,16 @@
 package com.studyship.modules.event;
 
-import com.studyship.modules.account.WithAccount;
+import com.studyship.infra.MockMvcTest;
 import com.studyship.modules.account.Account;
+import com.studyship.modules.account.AccountFactory;
+import com.studyship.modules.account.AccountRepository;
+import com.studyship.modules.account.WithAccount;
 import com.studyship.modules.study.Study;
-import com.studyship.modules.study.StudyControllerTest;
+import com.studyship.modules.study.StudyFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 
@@ -16,9 +20,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@MockMvcTest
+class EventControllerTest {
 
-class EventControllerTest extends StudyControllerTest {
-
+    @Autowired MockMvc mockMvc;
+    @Autowired AccountFactory accountFactory;
+    @Autowired StudyFactory studyFactory;
+    @Autowired AccountRepository accountRepository;
     @Autowired EventService eventService;
     @Autowired EnrollmentRepository enrollmentRepository;
 
@@ -26,8 +34,8 @@ class EventControllerTest extends StudyControllerTest {
     @DisplayName("선착순 모임에 참가 신청 - 자동 수락")
     @WithAccount("muto")
     void newEnrollment_to_FCFS_event_accepted() throws Exception {
-        Account whiteship = createAccount("whiteship");
-        Study study = createStudy("test-study", whiteship);
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Study study = studyFactory.createStudy("test-study", whiteship);
         Event event = createEvent("test-event", EventType.FCFS, 2, study, whiteship);
 
         mockMvc.perform(post("/study/" + study.getPath() + "/events/" + event.getId() + "/enroll")
@@ -43,12 +51,12 @@ class EventControllerTest extends StudyControllerTest {
     @DisplayName("선착순 모임에 참가 신청 - 대기중 (이미 인원이 꽉차서)")
     @WithAccount("muto")
     void newEnrollment_to_FCFS_event_not_accepted() throws Exception {
-        Account whiteship = createAccount("whiteship");
-        Study study = createStudy("test-study", whiteship);
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Study study = studyFactory.createStudy("test-study", whiteship);
         Event event = createEvent("test-event", EventType.FCFS, 2, study, whiteship);
 
-        Account may = createAccount("may");
-        Account june = createAccount("june");
+        Account may = accountFactory.createAccount("may");
+        Account june = accountFactory.createAccount("june");
         eventService.newEnrollment(event, may);
         eventService.newEnrollment(event, june);
 
@@ -66,9 +74,9 @@ class EventControllerTest extends StudyControllerTest {
     @WithAccount("muto")
     void accepted_account_cancelEnrollment_to_FCFS_event_not_accepted() throws Exception {
         Account muto = accountRepository.findByNickname("muto");
-        Account whiteship = createAccount("whiteship");
-        Account may = createAccount("may");
-        Study study = createStudy("test-study", whiteship);
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Account may = accountFactory.createAccount("may");
+        Study study = studyFactory.createStudy("test-study", whiteship);
         Event event = createEvent("test-event", EventType.FCFS, 2, study, whiteship);
 
         eventService.newEnrollment(event, may);
@@ -94,9 +102,9 @@ class EventControllerTest extends StudyControllerTest {
     @WithAccount("muto")
     void not_accepted_account_cancelEnrollment_to_FCFS_event_not_accepted() throws Exception {
         Account muto = accountRepository.findByNickname("muto");
-        Account whiteship = createAccount("whiteship");
-        Account may = createAccount("may");
-        Study study = createStudy("test-study", whiteship);
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Account may = accountFactory.createAccount("may");
+        Study study = studyFactory.createStudy("test-study", whiteship);
         Event event = createEvent("test-event", EventType.FCFS, 2, study, whiteship);
 
         eventService.newEnrollment(event, may);
@@ -129,8 +137,8 @@ class EventControllerTest extends StudyControllerTest {
     @DisplayName("관리자 확인 모임에 참가 신청 - 대기중")
     @WithAccount("muto")
     void newEnrollment_to_CONFIMATIVE_event_not_accepted() throws Exception {
-        Account whiteship = createAccount("whiteship");
-        Study study = createStudy("test-study", whiteship);
+        Account whiteship = accountFactory.createAccount("whiteship");
+        Study study = studyFactory.createStudy("test-study", whiteship);
         Event event = createEvent("test-event", EventType.CONFIRMATIVE, 2, study, whiteship);
 
         mockMvc.perform(post("/study/" + study.getPath() + "/events/" + event.getId() + "/enroll")

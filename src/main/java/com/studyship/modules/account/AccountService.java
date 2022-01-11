@@ -1,13 +1,13 @@
 package com.studyship.modules.account;
 
-import com.studyship.modules.account.form.SignUpForm;
 import com.studyship.infra.config.AppProperties;
-import com.studyship.modules.tag.Tag;
-import com.studyship.modules.zone.Zone;
 import com.studyship.infra.mail.EmailMessage;
 import com.studyship.infra.mail.EmailService;
 import com.studyship.modules.account.form.Notifications;
 import com.studyship.modules.account.form.Profile;
+import com.studyship.modules.account.form.SignUpForm;
+import com.studyship.modules.tag.Tag;
+import com.studyship.modules.zone.Zone;
 import com.studyship.modules.zone.ZoneRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

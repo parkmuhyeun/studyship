@@ -1,7 +1,7 @@
 package com.studyship.modules.main;
 
-import com.studyship.modules.account.CurrentAccount;
 import com.studyship.modules.account.Account;
+import com.studyship.modules.account.CurrentAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
