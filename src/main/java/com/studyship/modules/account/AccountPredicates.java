@@ -10,6 +10,6 @@ public class AccountPredicates {
 
     public static Predicate findByTagsAndZones(Set<Tag> tags, Set<Zone> zones) {
         QAccount account = QAccount.account;
-        return account.zones.any().in(zones).and(account.tags.any().in(tags));
+        return account.zones.any().in(zones).or(account.tags.any().in(tags));
     }
 }
