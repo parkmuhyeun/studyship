@@ -1,5 +1,6 @@
 package com.studyship.modules.study;
 
+import com.studyship.infra.AbstractContainerBaseTest;
 import com.studyship.infra.MockMvcTest;
 import com.studyship.modules.account.*;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
-public class StudyControllerTest {
+public class StudyControllerTest extends AbstractContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired StudyRepository studyRepository;

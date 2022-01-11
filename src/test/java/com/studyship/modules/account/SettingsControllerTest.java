@@ -1,6 +1,7 @@
 package com.studyship.modules.account;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studyship.infra.AbstractContainerBaseTest;
 import com.studyship.infra.MockMvcTest;
 import com.studyship.modules.tag.Tag;
 import com.studyship.modules.tag.TagForm;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @MockMvcTest
-class SettingsControllerTest {
+class SettingsControllerTest extends AbstractContainerBaseTest {
 
     @Autowired MockMvc mockMvc;
     @Autowired AccountRepository accountRepository;
