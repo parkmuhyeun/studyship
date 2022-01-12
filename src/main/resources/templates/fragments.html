@@ -87,7 +87,7 @@
                 </li>
             </ul>
             <form class="d-flex" th:action="@{/search/study}" method="get">
-                <input class="form-control me-2" type="search" placeholder="스터디 찾기" aria-label="Search">
+                <input class="form-control me-2" type="search" name="keyword" placeholder="스터디 찾기" aria-label="Search">
             </form>
         </div>
     </div>
@@ -198,12 +198,12 @@
         <div class="col-10">
             <p>
                 <span th:each="tag: ${study.tags}"
-                      class="font-weight-light text-monospace badge badge-pill badge-info mr-3">
+                      class="badge rounded-pill bg-info text-dark">
                     <a th:href="@{'/search/tag/' + ${tag.title}}" class="text-decoration-none text-white">
                         <i class="fa fa-tag"></i> <span th:text="${tag.title}">Tag</span>
                     </a>
                 </span>
-                <span th:each="zone: ${study.zones}" class="font-weight-light text-monospace badge badge-primary mr-3">
+                <span th:each="zone: ${study.zones}" class="badge rounded-pill bg-primary">
                     <a th:href="@{'/search/zone/' + ${zone.id}}" class="text-decoration-none text-white">
                         <i class="fa fa-globe"></i> <span th:text="${zone.localNameOfCity}">City</span>
                     </a>
