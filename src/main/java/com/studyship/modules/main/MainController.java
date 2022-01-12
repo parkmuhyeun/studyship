@@ -38,11 +38,12 @@ public class MainController {
 
     @GetMapping("/search/study")
     String search(String keyword, Model model,
-            @PageableDefault(size = 9, page = 0, sort = "publishedDateTime", direction = Sort.Direction.ASC)
+            @PageableDefault(size = 9, page = 0, sort = "publishedDateTime", direction = Sort.Direction.DESC)
                     Pageable pageable) {
         Page<Study> studyPage =  studyRepository.findByKeyword(keyword, pageable);
         model.addAttribute("studyPage", studyPage);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("sortProperty", pageable.getSort().toString().contains("publishedDateTime") ? "publishedDateTime" : "memberCount");
         return "search";
     }
 }
