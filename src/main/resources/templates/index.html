@@ -11,11 +11,20 @@
 
 
     <div class="container">
-        <div class="py-5 text-center">
-            <h2>스터디쉽</h2>
+        <div class="p-5 mb-4 bg-light rounded-3 text-center" >
+            <div class="container-fluid py-5">
+                <h1 class="4 fw-bold">스터디쉽</h1>
+                <p class="col-md-12 fs-6">태그와 지역 기반으로 스터디를 찾고 참여하세요</p>
+                <p class="col-md-12 fs-6">스터디 모임 관리 기능을 제공합니다.</p>
+                <a class="btn btn-primary btn-lg" th:href="@{/sign-up}">회원가입</a>
+            </div>
         </div>
 
+        <div class="row justify-content-center pt-3">
+            <div th:replace="fragments.html :: study-list (studyList = ${studyList})"></div>
+        </div>
         <div th:replace="fragments.html :: footer"></div>
+        <script th:replace="fragments.html :: date-time"></script>
     </div>
 </body>
 </html>

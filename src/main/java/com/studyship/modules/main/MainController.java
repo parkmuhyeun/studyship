@@ -2,7 +2,6 @@ package com.studyship.modules.main;
 
 import com.studyship.modules.account.Account;
 import com.studyship.modules.account.CurrentAccount;
-import com.studyship.modules.notification.NotificationRepository;
 import com.studyship.modules.study.Study;
 import com.studyship.modules.study.StudyRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +25,7 @@ public class MainController {
             model.addAttribute(account);
         }
 
+        model.addAttribute("studyList", studyRepository.findFirst9ByPublishedAndClosedOrderByPublishedDateTimeDesc(true, false));
         return "index";
     }
 
